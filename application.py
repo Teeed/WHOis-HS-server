@@ -63,8 +63,10 @@ def get_current_dhcp_leases():
 
 		lease_data = lease[1]
 
-		# print lease_data['=mac-address'], lease_data['=active-address']
-		matches.add( (lease_data['=mac-address'], lease_data['=address'].lower()) )
+		try:
+			matches.add( (lease_data['=active-address'], lease_data['=mac-address'].lower()) )
+		except KeyError:
+			pass
 
 	return list(matches)
 
